@@ -86,7 +86,7 @@ class rockBlock(object):
                 
         command = "AT"
                 
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if( self.s.readline().strip() == command ):
             
@@ -112,7 +112,7 @@ class rockBlock(object):
 
         command = "AT+CSQ"
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
              
         if( self.s.readline().strip() == command):
         
@@ -151,7 +151,7 @@ class rockBlock(object):
          
         command = "AT-MSSTM"
                 
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if(self.s.readline().strip() == command):
                 
@@ -211,7 +211,7 @@ class rockBlock(object):
         
         command = "AT+GSN"
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if(self.s.readline().strip() == command):
                 
@@ -234,7 +234,7 @@ class rockBlock(object):
         #Disable Flow Control
         command = "AT&K0"
                 
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if(self.s.readline().strip() == command and self.s.readline().strip() == "OK"):
           
@@ -242,7 +242,7 @@ class rockBlock(object):
             #Store Configuration into Profile0
             command = "AT&W0"
                 
-            self.s.write(command + "\r")
+            self.s.write(bytes(b'command') + bytes(b'\r'))
             
             if(self.s.readline().strip() == command and self.s.readline().strip() == "OK"):
           
@@ -250,7 +250,7 @@ class rockBlock(object):
                 #Use Profile0 as default
                 command = "AT&Y0"
                     
-                self.s.write(command + "\r")
+                self.s.write(bytes(b'command') + bytes(b'\r'))
                 
                 if(self.s.readline().strip() == command and self.s.readline().strip() == "OK"):    
                     
@@ -258,7 +258,7 @@ class rockBlock(object):
                     #Flush Memory
                     command = "AT*F"
                     
-                    self.s.write(command + "\r")
+                    self.s.write(bytes(b'command') + bytes(b'\r'))
                 
                     if(self.s.readline().strip() == command and self.s.readline().strip() == "OK"):
                                                 
@@ -312,14 +312,14 @@ class rockBlock(object):
                 
         if( len(msg) > 340):
                
-            print "sendMessageWithBytes bytes should be <= 340 bytes"
+            print("sendMessageWithBytes bytes should be <= 340 bytes")
             
             return False
         
         
         command = "AT+SBDWB=" + str( len(msg) )
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         
         if(self.s.readline().strip() == command):
@@ -370,7 +370,7 @@ class rockBlock(object):
         
         command = "ATE1"
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         response = self.s.readline().strip()
         
@@ -388,7 +388,7 @@ class rockBlock(object):
         
         command = "AT&K0"
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if(self.s.readline().strip() == command):
              
@@ -404,7 +404,7 @@ class rockBlock(object):
                 
         command = "AT+SBDMTA=0"
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if( self.s.readline().strip() == command ):
             
@@ -429,7 +429,7 @@ class rockBlock(object):
                          
             command = "AT+SBDIX"
             
-            self.s.write(command + "\r")
+            self.s.write(bytes(b'command') + bytes(b'\r'))
             
             if( self.s.readline().strip() == command ):
                 
@@ -533,7 +533,7 @@ class rockBlock(object):
                         
             if(SIGNAL_ATTEMPTS == 0 or signal < 0):
                 
-                print  "NO SIGNAL"
+                print("NO SIGNAL")
                                 
                 if(self.callback != None and callable(self.callback.rockBlockSignalFail) ): 
                     self.callback.rockBlockSignalFail()
@@ -564,7 +564,7 @@ class rockBlock(object):
           
         if( response == "OK" ):
         
-            print "No message content.. strange!"
+            print("No message content.. strange!")
             
             if(self.callback != None and callable(self.callback.rockBlockRxReceived) ): 
                 self.callback.rockBlockRxReceived(mtMsn, "")
@@ -584,7 +584,7 @@ class rockBlock(object):
         
         command = "AT-MSSTM"
         
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
         
         if( self.s.readline().strip() == command ):  #Echo
             
@@ -607,7 +607,7 @@ class rockBlock(object):
         
         command = "AT+SBDD0"
                 
-        self.s.write(command + "\r")
+        self.s.write(bytes(b'command') + bytes(b'\r'))
           
         if(self.s.readline().strip() == command):
                     
